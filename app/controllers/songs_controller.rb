@@ -5,14 +5,14 @@ class SongsController < OpenReadController
 
   # GET /songs
   def index
-    @songs = Song.all
+    @songs = current_user.songs.all
 
     render json: @songs
   end
 
   # GET /songs/1
   def show
-    @songs = current_user.songs.all
+    render json: @song
   end
 
   # POST /songs
@@ -44,7 +44,7 @@ class SongsController < OpenReadController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_song
-    @song = Song.find(params[:id])
+    @song = current_user.songs.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
