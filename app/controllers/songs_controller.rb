@@ -12,12 +12,12 @@ class SongsController < OpenReadController
 
   # GET /songs/1
   def show
-    render json: @song
+    @songs = current_user.songs.all
   end
 
   # POST /songs
   def create
-    @song = Song.new(song_params)
+    @song = current_user.songs.build(song_params)
 
     if @song.save
       render json: @song, status: :created, location: @song
